@@ -1,0 +1,68 @@
+<mvc:View controllerName="utg.Orders.controller.Product" xmlns="sap.m" xmlns:semantic="sap.f.semantic" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form" xmlns:layout="sap.ui.layout">
+	<semantic:SemanticPage id="productPage" busy="{productView>/busy}" busyIndicatorDelay="{productView>/delay}">
+		<semantic:titleHeading>
+			<Title text="Product ID: {ProductID}" level="H2"/>
+		</semantic:titleHeading>
+		<semantic:headerContent>
+			<layout:HorizontalLayout allowWrapping="true">
+				<layout:VerticalLayout class="sapUiMediumMarginEnd">
+					<ObjectAttribute title="Product Name" text="{ProductName}"/>
+				</layout:VerticalLayout>
+
+				<layout:HorizontalLayout>
+					<ObjectAttribute class="sapUiTinyMarginEnd" title="Availability"/>
+					<ObjectStatus text="{path:'UnitsInStock', formatter:'.formatter.getStockText'}" 
+								  state="{path:'UnitsInStock', formatter:'.formatter.getStockState'}" />
+				</layout:HorizontalLayout>
+			</layout:HorizontalLayout>
+		</semantic:headerContent>
+		<semantic:content>
+			<VBox class="sapUiSmallMargin">
+				<f:SimpleForm id="SimpleFormDisplay471" editable="false" 
+					layout="ResponsiveGridLayout" title="Product Detail" 
+					labelSpanXL="4" labelSpanL="4"
+					labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" 
+					emptySpanXL="1" emptySpanL="1" emptySpanM="1" emptySpanS="0" 
+					columnsXL="4"
+					columnsL="3" columnsM="2" singleContainerFullSize="false">
+					<f:content>
+						<Label text="Name"/>
+						<Text text="{ProductName}"/>
+						<Label text="SupplierID"/>
+						<Text text="{SupplierID}"/>
+						<Label text="CategoryID"/>
+						<Text text="{CategoryID}"/>
+						<Label text="QuantityPerUnit"/>
+						<Text text="{QuantityPerUnit}"/>
+						<Label text="UnitPrice"/>
+						<Text text="{UnitPrice}"/>
+						<Label text="UnitsInStock"/>
+						<Text text="{UnitsInStock}"/>
+						<Label text="UnitsOnOrder"/>
+						<Text text="{UnitsOnOrder}"/>
+						<Label text="ReorderLevel"/>
+						<Text text="{ReorderLevel}"/>
+						<Label text="Discontinued"/>
+						<Text text="{Discontinued}"/>
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+		</semantic:content>
+		<!--Semantic ShareMenu Buttons-->
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press=".onSendEmailPress"/>
+		</semantic:sendEmailAction>
+		<semantic:closeAction>
+			<semantic:CloseAction id="closeColumn" press=".onCloseDetailPress"/>
+		</semantic:closeAction>
+		<semantic:fullScreenAction>
+			<semantic:FullScreenAction id="enterFullScreen"
+				visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/endColumn/fullScreen}}" press=".toggleFullScreen"/>
+		</semantic:fullScreenAction>
+		<semantic:exitFullScreenAction>
+			<semantic:ExitFullScreenAction id="exitFullScreen"
+				visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/endColumn/fullScreen}}" press=".toggleFullScreen"/>
+		</semantic:exitFullScreenAction>
+	</semantic:SemanticPage>
+</mvc:View>
